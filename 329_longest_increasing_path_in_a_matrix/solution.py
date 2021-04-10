@@ -4,30 +4,30 @@ class Solution:
         if not self.is_in_bounds(i, j):
             return 0
 
-        self.set_processing(i, j, True)
+        # self.set_processing(i, j, True)
         res = 1
         nbrs = [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]
 
         for x, y in nbrs:
             if (
                 self.is_in_bounds(x, y)
-                and not self.is_processing(x, y)
+                # and not self.is_processing(x, y)
                 and self.val(x, y) < self.val(i, j)
             ):
                 res = max(res, 1+self.lip(x, y))
 
-        self.set_processing(i, j, False)
+        # self.set_processing(i, j, False)
 
         return res
 
-    def set_processing(self, i, j, val):
-        if val:
-            self.processing.add((i, j))
-        else:
-            self.processing.discard((i, j))
+    # def set_processing(self, i, j, val):
+    #     if val:
+    #         self.processing.add((i, j))
+    #     else:
+    #         self.processing.discard((i, j))
 
-    def is_processing(self, i, j):
-        return (i,j) in self.processing
+    # def is_processing(self, i, j):
+    #     return (i,j) in self.processing
 
     def is_in_bounds(self, i, j):
         r, c = self.r, self.c
@@ -41,7 +41,11 @@ class Solution:
             return 0
 
         self.r, self.c = len(matrix), len(matrix[0])
-        self.processing = set()
+        # Don't need to check processing as we will never go back
+        # from where we came while traversing since we check
+        # using the less-than operator before recursing
+        # so it will never be true for caller in recursed called
+        # self.processing = set()
         self.matrix = matrix
         res = 1
 
