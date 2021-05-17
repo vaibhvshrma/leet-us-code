@@ -13,8 +13,8 @@ class Solution:
 
         if (
             (parent is None and root not in self.covered)
-             or root.left not in self.covered
-             or root.right not in self.covered
+            or root.left not in self.covered
+            or root.right not in self.covered
         ):
             self.ans += 1
             self.covered.update({root, root.left, root.right, parent})
